@@ -54,8 +54,6 @@ namespace BotNoLuis.Bots
 
             await turnContext.SendActivityAsync(MessageFactory.Text($"Bot confirms: {txt}"), cancellationToken);
             await ProcessOrder(turnContext, cancellationToken, txt);
-
-            //await turnContext.SendActivityAsync(MessageFactory.Text($"Echo: {turnContext.Activity.Text}"), cancellationToken);
         }
 
         private async Task ProcessOrder(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken, string txt)
@@ -241,7 +239,6 @@ namespace BotNoLuis.Bots
 
             // This works for responses such as "11/14/2018", "9pm", "tomorrow", "Sundat at  5pm", and so on.
             // The recognizer returns a list of potential recognition results, if any.
-
             try
             {
                 var results = DateTimeRecognizer.RecognizeDateTime(input, Culture.English);
@@ -263,13 +260,12 @@ namespace BotNoLuis.Bots
                         }
                     }
 
-
                 }
                 message = "I'm sorry, please enter a date at least an hour from now.";
             }
-            catch 
+            catch
             {
-                message = "I'm sorry, I couldn't interpret that as an correct data. Please enter a date at least an hour from now.";    
+                message = "I'm sorry, I couldn't interpret that as an correct data. Please enter a date at least an hour from now.";
             }
 
             return false;
@@ -280,8 +276,6 @@ namespace BotNoLuis.Bots
             string qry = "When do you want it delivered?";
             await SendSuggestedActionAsync(qry, null, turnContext, cancellationToken);
         }
-
-
 
     }
 }
